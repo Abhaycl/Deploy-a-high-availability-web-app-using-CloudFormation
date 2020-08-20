@@ -7,7 +7,14 @@ The objective of this project is to deploy web servers for a highly available we
 [//]: # (Image References)
 
 [image1]: ./images/Diagrama_AWS.jpeg "AWS Diagram"
-[image2]: ./images/image_event_datafile_new.jpg "Denormalized dataset"
+[image2]: ./images/Bucket1.jpg "Development Bucket"
+[image3]: ./images/Bucket2.jpg "Development Bucket"
+[image4]: ./images/Bucket3.jpg "Development Bucket"
+[image5]: ./images/Bucket4.jpg "Development Bucket"
+[image6]: ./images/Bucket5.jpg "Development Bucket"
+[image7]: ./images/Bucket6.jpg "Development Bucket"
+[image8]: ./images/Bucket7.jpg "Development Bucket"
+[image9]: ./images/Bucket8.jpg "Development Bucket"
 
 
 ---
@@ -94,7 +101,56 @@ The diagram we have designed and will use for the Udagram application is as foll
 
 ![alt text][image1]
 
-## Apache Cassandra.
+#### Version of software tools used for this project.
+
+* Visual Studio Code/1.48.0
+* AWS CLI/1.18.120
+* Python/2.7.17
+* Windows/10
+* Botocore/1.17.43
+
+
+## Project deployment.
+
+#### Create S3 Bucket.
+
+Navigate to the “AWS Management Console” page, type “S3” in the “Find Services” box and then select “S3”.
+
+![alt text][image2]
+
+The Amazon S3 dashboard displays. Click “Create bucket”.
+
+![alt text][image3]
+
+Enter a “Bucket name” and click “Next”. Note: Bucket names must be globally unique.
+
+![alt text][image4]
+
+Click “Next” again to skip over “Step 2: Configure Options”.
+
+On “Step 3: Set Permissions”, uncheck “Block all public access”.
+
+![alt text][image5]
+
+Click “Next” and click “Create bucket”.
+
+![alt text][image6]
+
+Once the bucket is created, click on the name of the bucket to open the bucket to the contents.
+
+![alt text][image7]
+
+The developer team provides us with the code of the website in the S3 container that we have previously created, which leaves us a compressed file called udacity.zip, this file has been uploaded with the following command from a terminal.
+
+```bash
+  aws s3 cp udacity.zip s3://udacity-website-practice2
+```
+
+![alt text][image8]
+
+And in the S3 console.
+
+![alt text][image9]
 
 Aside from being a backbone for Facebook, Uber, and Netflix, Cassandra is a very scalable and resilient database that is easy to master and simple to configure. Apache Cassandra uses its own query language – CQL – which is similar to SQL. Note that JOINS, GROUP BY, or subqueries are not supported by CQL.
 
