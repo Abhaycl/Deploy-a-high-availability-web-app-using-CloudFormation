@@ -15,6 +15,7 @@ The objective of this project is to deploy web servers for a highly available we
 [image7]: ./images/Bucket6.jpg "Development Bucket"
 [image8]: ./images/Bucket7.jpg "Development Bucket"
 [image9]: ./images/Bucket8.jpg "Development Bucket"
+[image10]: ./images/KeyPairs.jpg "Key Pairs"
 
 
 ---
@@ -65,11 +66,14 @@ The summary of the files and folders within repo is provided in the table below:
 
 | File/Folder              | Definition                                                                                                   |
 | :----------------------- | :----------------------------------------------------------------------------------------------------------- |
-| event_data/*             | Folder that contains all the csv files with the data used in this project.                                   |
 | images/*                 | Folder containing the images of the project.                                                                 |
+| scripts/*                | Folder containing the project execution scripts.                                                             |
 |                          |                                                                                                              |
-| event_datafile_new.csv   | Contains the denormalized dataset that was generated in the ETL pipeline procedures.                         |
-| Project_1B_ Project_Template.ipynb | Reads and processes the denormalized dataset and loads the data into the tables. This notebook contains detailed instructions on the ETL process, the data to be loaded in each of the three examples as well as their corresponding queries. |
+| jumboxKP.pem             | File containing the key pair of the jump box machine.                                                        |
+| structure_network_server.json | File containing the project parameters.                                                                 |
+| structure_network_server.yml | Template containing all network coding, servers and their configurations.                                |
+| udacity.zip              | Compressed file containing the website downloaded by the development team.                                   |
+| UdacityMadridKP.pem      | File containing the key pair of the machines in the private networks.                                        |
 |                          |                                                                                                              |
 | README.md                | Contains the project documentation.                                                                          |
 | README.pdf               | Contains the project documentation in PDF format.                                                            |
@@ -100,6 +104,7 @@ In this project, we'll deploy web servers for a highly available web app using C
 The diagram we have designed and will use for the Udagram application is as follows:
 
 ![alt text][image1]
+
 
 #### Version of software tools used for this project.
 
@@ -151,6 +156,11 @@ The developer team provides us with the code of the website in the S3 container 
 And in the S3 console.
 
 ![alt text][image9]
+
+The optional part is to create the key pairs for the jump box machine to access the machines that are in the private network in case you need to access them.
+
+![alt text][image10]
+
 
 Aside from being a backbone for Facebook, Uber, and Netflix, Cassandra is a very scalable and resilient database that is easy to master and simple to configure. Apache Cassandra uses its own query language – CQL – which is similar to SQL. Note that JOINS, GROUP BY, or subqueries are not supported by CQL.
 
