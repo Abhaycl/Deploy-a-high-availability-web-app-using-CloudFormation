@@ -18,7 +18,7 @@ The objective of this project is to deploy web servers for a highly available we
 
 For the execution of your own code, in the Visual Studio Code application, we open a terminal with powershell and run our CloudFormation script.
 
-For Windows systems, we have the following scripts:
+## For Windows systems, we have the following scripts:
 
 To create the stack from the project.
 ```bash
@@ -35,7 +35,7 @@ To delete the stack from the project.
   .\Delete_Stack.bat UdagramApp
 ```
 
-For Linux systems, we have the following scripts:
+## For Linux systems, we have the following scripts:
 
 To create the stack from the project.
 ```bash
