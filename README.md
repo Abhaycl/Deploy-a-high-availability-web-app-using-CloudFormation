@@ -1,13 +1,12 @@
 # Deploy a high-availability web app using CloudFormation, Project Starter Code
 
-The objective of this project is to apply data modeling with Apache Cassandra and build an ETL pipeline using Python.
-The objective of this project is to deploy web servers for a highly available web app using CloudFormation. We will write the code that creates and deploys the infrastructure and application for an Instagram-like app from the ground up. We will begin with deploying the networking components, followed by servers, security roles and software
+The objective of this project is to deploy web servers for a highly available web app using CloudFormation.
 
 <!--more-->
 
 [//]: # (Image References)
 
-[image1]: ./images/tables.jpg "Database Tables for sparkify"
+[image1]: ./images/Diagrama_AWS.jpeg "AWS Diagram"
 [image2]: ./images/image_event_datafile_new.jpg "Denormalized dataset"
 
 
@@ -53,7 +52,6 @@ To delete the stack from the project.
 ```
 
 
-
 ---
 
 The summary of the files and folders within repo is provided in the table below:
@@ -90,16 +88,9 @@ The summary of the files and folders within repo is provided in the table below:
 In this project, we'll deploy web servers for a highly available web app using CloudFormation. We'll write the code that creates and deploys the infrastructure and application for an Instagram-like app from the ground up. We'll begin with deploying the networking components, followed by servers, security roles and software.
 
 
-## Denormalizing the Database.
+## AWS Diagram.
 
-The goal of denormalization in this context is to reduce the amount of time needed to read data. Unlike relational databases, non-relational databases have been optimized for fast reads and writes; therefore, denormalization is a must!
-Always thinking about the necessary queries first and designing the denormalization scheme accordingly. One table per query is a good strategy.
-
-Denormalization changes the application: First, it means data redundancy, which translates to significantly increased storage costs. Second, fixing data inconsistency is now the main job of the application.
-
-Again, Data Modeling in Apache Cassandra is query focused – and that focus needs to be put on the WHERE clause. This clause allows to do fast reads. Note that the partition key always needs to be included in the query! The clustering columns can be used to put the results in order.
-
-The tables that will contain the data of our consultations are:
+The diagram we have designed and will use for the Udagram application is as follows:
 
 ![alt text][image1]
 
