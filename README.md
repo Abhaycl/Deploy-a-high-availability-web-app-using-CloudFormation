@@ -16,7 +16,28 @@ The objective of this project is to deploy web servers for a highly available we
 [image8]: ./images/Bucket7.jpg "Development Bucket"
 [image9]: ./images/Bucket8.jpg "Development Bucket"
 [image10]: ./images/KeyPairs.jpg "Key Pairs"
-
+[image11]: ./images/01Subida.jpg "Deployment"
+[image12]: ./images/02Subida.jpg "Deployment"
+[image13]: ./images/03Subida.jpg "Deployment"
+[image14]: ./images/04Subida.jpg "Deployment"
+[image15]: ./images/05Subida.jpg "Deployment"
+[image16]: ./images/06Subida.jpg "Deployment"
+[image17]: ./images/07Subida.jpg "Deployment"
+[image18]: ./images/08Subida.jpg "Deployment"
+[image19]: ./images/09Subida.jpg "Deployment"
+[image20]: ./images/10Subida.jpg "Deployment"
+[image21]: ./images/11Subida.jpg "Deployment"
+[image22]: ./images/12Subida.jpg "Deployment"
+[image23]: ./images/13Subida.jpg "Deployment"
+[image24]: ./images/14Subida.jpg "Deployment"
+[image25]: ./images/15Subida.jpg "Deployment"
+[image26]: ./images/16Subida.jpg "Deployment"
+[image27]: ./images/17Subida.jpg "Deployment"
+[image28]: ./images/18Subida.jpg "Deployment"
+[image29]: ./images/19Subida.jpg "Deployment"
+[image30]: ./images/20Subida.jpg "Deployment"
+[image31]: ./images/21Subida.jpg "Deployment"
+[image32]: ./images/website.jpg "Website"
 
 ---
 
@@ -161,137 +182,66 @@ The optional part is to create the key pairs for the jump box machine to access 
 
 ![alt text][image10]
 
+## Deployment script execution steps.
 
-Aside from being a backbone for Facebook, Uber, and Netflix, Cassandra is a very scalable and resilient database that is easy to master and simple to configure. Apache Cassandra uses its own query language – CQL – which is similar to SQL. Note that JOINS, GROUP BY, or subqueries are not supported by CQL.
+The following images show the status of the steps followed in the deployment of our network and server configuration script for the implementation of the website provided by the development team.
 
-Some terms used in Cassandra differ from those we already know:
+![alt text][image11]
 
-A keyspace, for example, is analogous to the term database in a relational database.
+![alt text][image12]
 
-Another example is a partition, which is a collection of rows. Cassandra organizes data into partitions; there, each partition consists of multiple columns.
+![alt text][image13]
 
-Partitions are stored on a node. Nodes (or servers) are generally part of a cluster where each node is responsible for a fraction of the partitions.
+![alt text][image14]
 
-The Primary Key defines how each row can be uniquely identified and how the data is distributed across the nodes in our system. A partition key is responsible for identifying the partition or node in the cluster that stores a row – whereas the purpose of a clustering key (or clustering column) is to store row data within a partition in a sorted order.
+![alt text][image15]
 
-When we have only one partition key and no clustering column, it is called a Single Primary Key. Should we use one (or more) partition key(s) and one (or more) clustering column(s) instead, we call it a Compound Primary Key or Composite Primary Key.
+![alt text][image16]
 
+![alt text][image17]
 
-## Data.
+![alt text][image18]
 
-The data used in this project, it's better to understand what they represents.
+![alt text][image19]
 
-#### Song Dataset.
+![alt text][image20]
 
-We'll be working with dataset: event_data. The directory of CSV files partitioned by date. For example, here are the file paths for this dataset.
+![alt text][image21]
 
-```bash
-  event_data/2018-11-01-events.csv
-  event_data/2018-11-02-events.csv
-  event_data/2018-11-03-events.csv
-  .
-  .
-  event_data/2018-11-30-events.csv
-```
+![alt text][image22]
 
-These files are in CSV format and contains several records with the song data separated by a comma, below is an example of what a single song file, 2018-11-01-events.csv, looks like.
+![alt text][image23]
 
-```bash
-  Black Eyed Peas,Logged In,Sylvie,F,0,Cruz,214.93506,free,"Washington-Arlington-Alexandria, DC-VA-MD-WV",PUT,NextSong,1.54027E+12,9,Pump It,200,1.54111E+12,10
-```
+![alt text][image24]
 
-The code to pre-process the CSV files was provided already. So no need to go in-depth for it.
+![alt text][image25]
 
+![alt text][image26]
 
-## ETL Pipeline.
+![alt text][image27]
 
-Extract, transform, load (ETL) is the general procedure of copying data from one or more sources into a destination system which represents the data differently from, or in a different context than, the sources.
+![alt text][image28]
 
-#### ETL Pipeline for Creating and Querying NoSQL Database.
+![alt text][image29]
 
-We need to create a streamlined CSV file from all these. The final file will be used to extract and insert data into Apache Cassandra tables.
+![alt text][image30]
 
-The event_datafile_new.csv has 6821 rows and contains the following columns:
-
-* artist
-* firstName of user
-* gender of user
-* item number in session
-* last name of user
-* length of the song
-* level (paid or free song)
-* location of the user
-* sessionId
-* song title
-* userId
-
-The image below is a screenshot of what the denormalized data should appear like in the event_datafile_new.csv after the code above is run:
-
-![alt text][image2]
-
-## Apache Cassandra Coding Portion.
-
-We will model our data based on the queries provided to us by the analytics team at Sparkify. But first, let's setup Apache Cassandra for this. This is a three step process:
-
-#### Create a Cluster.
-
-We create a cluster and connect it to our local host. This makes a connection to a Cassandra instance on our local machine.
-
-```bash
-# This should make a connection to a Cassandra instance your local machine (127.0.0.1).
-from cassandra.cluster import Cluster
-
-try:
-    # Connect to local Apache Cassandra instance.
-    cluster = Cluster(['127.0.0.1'])
-    # To establish connection and begin executing queries, need a session.
-    session = cluster.connect()
-
-except Exception as e:
-    print(e)
-```
-
-#### Create a Keyspace.
-
-```bash
-# Create a keyspace called sparkify.
-try:
-    session.execute("""
-        CREATE KEYSPACE IF NOT EXISTS sparkify
-        WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 1}"""
-    )
-
-except Exception as e:
-    print(e)
-```
-
-#### Set Keyspace.
-
-```bash
-# Set KEYSPACE to the keyspace specified above.
-try:
-    session.set_keyspace("sparkify")
-
-except Exception as e:
-    print(e)
-```
+![alt text][image31]
 
 
-## Data Modeling.
+## Website.
 
-In Apache Cassandra, we model our data based on the queries we will perform. Aggregation like GROUP BY, JOIN are highly discouraged in Cassandra. This is because we shouldn't scan the entire data because it is distributed on multiple nodes. It will slow down our system because sending all of that data from multiple nodes to a single machine will crash it.
+This would be the display of our website on the route:  http://Udagr-WebAp-RLD719225CJF-758923361.us-west-2.elb.amazonaws.com
 
-Now we will create the tables to run the following queries:
-
-1. Give me the artist, song title and song's length in the music app history that was heard during sessionId = 338, and itemInSession = 4.
-
-2. Give me only the following: name of artist, song (sorted by itemInSession) and user (first and last name) for userid = 10, sessionid = 182.
-
-3. Give me every user name (first and last) in my music app history who listened to the song "All Hands Against His Own".
-
-To gain more technical detail about the coding portion please view the ETL notebook.
+![alt text][image32]
 
 
 ## Conclusion.
 
-This project provides Sparkify startup customers with tools to analyze their data and help answer their key business questions, such as "Which artist and song was heard in a specified session," "Which artist, song and user was heard in a specified session," or "Which users heard a certain song".
+For this project we had to look in detail how each step of the configuration was done, create the jump box to check each step of the apps installations, because we found a small problem with the installation of Apache in a Ubuntu 18 machine, so we added the following lines to the code so that the Apache installation would be unattended.
+
+```bash
+            export DEBIAN_FRONTEND=noninteractive
+            sudo dpkg-reconfigure debconf -f noninteractive -p critical
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" apache2
+```
