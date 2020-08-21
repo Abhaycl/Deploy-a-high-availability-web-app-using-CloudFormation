@@ -234,14 +234,3 @@ The following images show the status of the steps followed in the deployment of 
 This would be the display of our website on the route:  http://Udagr-WebAp-RLD719225CJF-758923361.us-west-2.elb.amazonaws.com
 
 ![alt text][image32]
-
-
-## Conclusion.
-
-For this project we had to look in detail how each step of the configuration was done, create the jump box to check each step of the apps installations, because we found a small problem with the installation of Apache in a Ubuntu 18 machine, so we added the following lines to the code so that the Apache installation would be unattended.
-
-```bash
-            export DEBIAN_FRONTEND=noninteractive
-            sudo dpkg-reconfigure debconf -f noninteractive -p critical
-            sudo DEBIAN_FRONTEND=noninteractive apt-get install -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" apache2
-```
